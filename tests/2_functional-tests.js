@@ -67,8 +67,6 @@ suite('Functional Tests', function () {
           assert.equal(res.type, "application/json")
           assert.equal(res.body.name, "Giovanni")
           assert.equal(res.body.surname, "da Verrazzano")
-
-
           done()
         })
 
@@ -79,9 +77,16 @@ suite('Functional Tests', function () {
 
 const Browser = require('zombie');
 
+Browser.site = 'https://boilerplate-mochachai--wdbsa.repl.co/'
+
+const browser = new Browser();
+
 suite('Functional Tests with Zombie.js', function () {
   this.timeout(5000);
 
+  suiteSetup(async function () {
+    await new Promise(resolve => browser.visit('/', resolve));
+  });
 
 
   suite('Headless browser', function () {
